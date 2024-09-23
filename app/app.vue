@@ -16,3 +16,9 @@ const height = window.innerHeight
     <TheParticles />
   </TresCanvas>
 </template>
+
+<style>
+html, body {
+  background-color: black;
+}
+</style>
