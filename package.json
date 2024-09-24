@@ -13,6 +13,8 @@
     "@nuxt/eslint": "^0.5.7",
     "@tresjs/core": "^4.2.10",
     "@tresjs/nuxt": "^3.0.7",
+    "@vueuse/core": "^11.1.0",
+    "@vueuse/nuxt": "^11.1.0",
     "nuxt": "^3.13.0",
     "three": "^0.168.0",
     "vue": "latest",

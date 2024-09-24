@@ -2,7 +2,7 @@ precision highp float;
 
 uniform sampler2D uTexture;
 uniform float uTextureSize;
-uniform vec2 resolution;
+uniform vec2 uResolution;
 
 varying vec2 vUv;
 

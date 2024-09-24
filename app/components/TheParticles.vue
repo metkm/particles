@@ -6,10 +6,11 @@ import simFrag from '~/shader/simulation.frag?raw'
 
 const width = window.innerWidth
 const height = window.innerHeight
-const size = 80
-const r = 400
+const size = 30
+const r = 200
 
 const { onLoop } = useRenderLoop()
+const { x, y } = useMouse()
 
 const geometry = new BufferGeometry()
 const offsets = new Float32Array(size * size * 3)
@@ -31,19 +32,26 @@ const dataTexture = new DataTexture(offsets, size, size, RGBAFormat, FloatType)
 dataTexture.needsUpdate = true
 
 const uniforms = {
-  resolution: { value: new Vector2(size, size) },
+  uResolution: { value: new Vector2(size, size) },
+  uMouse: { value: new Vector2(x.value, y.value) },
   uTexture: { value: dataTexture },
   uTextureSize: { value: size },
   uRadius: { value: r },
   uTime: { value: 0 },
 }
 
-// onMounted(() => {
-//   geometry.value?.setAttribute('position', new BufferAttribute(offsets, 3))
-// })
-
 onLoop(({ elapsed }) => {
   uniforms.uTime.value = elapsed
+})
+
+watch([x, y], () => {
+  const normalizedX = x.value / width
+  const normalizedY = 1 - (y.value / height)
+
+  uniforms.uMouse.value.set(
+    (normalizedX - 0.5),
+    (normalizedY - 0.5),
+  )
 })
 </script>
 
