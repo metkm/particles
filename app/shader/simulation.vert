@@ -19,7 +19,6 @@ void main() {
   vUv = uv;
 
   float pRadian = atan(position.y, position.x);
-  float mRadian = atan(uMouse.y, uMouse.x);
   float radianDiff = 170.0 - distance(uMouse, position.xy / uResolution.xy) * 30.0;
 
   float off = cos(pRadian * 20.0 + uTime) * radianDiff;
