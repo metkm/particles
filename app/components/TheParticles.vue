@@ -6,8 +6,9 @@ import simFrag from '~/shader/simulation.frag?raw'
 
 const width = window.innerWidth
 const height = window.innerHeight
-const size = 30
-const r = 200
+const size = 50
+// const r = 200
+const r = 10
 
 const { onLoop } = useRenderLoop()
 const { x, y } = useMouse()
@@ -18,11 +19,21 @@ const offsets = new Float32Array(size * size * 3)
 for (let i = 0; i < size; i++) {
   for (let j = 0; j < size; j++) {
     const index = i * size * 3 + j * 3
-    const theta = Math.random() * Math.PI * 2.0
 
-    offsets[index + 0] = r * Math.cos(theta)
-    offsets[index + 1] = r * Math.sin(theta)
-    offsets[index + 2] = 0.0
+    offsets[index + 0] = ((i - size / 2 + 0.5) * r)
+    offsets[index + 1] = ((j - size / 2 + 0.5) * r)
+
+    console.log(offsets[index])
+
+    // offsets[index + 0] = 200.0
+    // offsets[index + 1] = 0.0
+    // offsets[index + 2] = 0.0
+
+    // const theta = Math.random() * Math.PI * 2.0
+
+    // offsets[index + 0] = r * Math.cos(theta)
+    // offsets[index + 1] = r * Math.sin(theta)
+    // offsets[index + 2] = 0.0
   }
 }
 
@@ -32,7 +43,8 @@ const dataTexture = new DataTexture(offsets, size, size, RGBAFormat, FloatType)
 dataTexture.needsUpdate = true
 
 const uniforms = {
-  uResolution: { value: new Vector2(size, size) },
+  // uResolution: { value: new Vector2(size, size) },
+  uResolution: { value: new Vector2(width, height) },
   uMouse: { value: new Vector2(x.value, y.value) },
   uTexture: { value: dataTexture },
   uTextureSize: { value: size },
